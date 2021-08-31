@@ -4,19 +4,41 @@ import SwiftUI
 // MARK: - ContentView
 
 struct ContentView: View {
-    
+
     var body: some View {
 
-        ScrollViewReactiveHeader(header: {
-            
-            HeaderView()
-        }, headerOverlay: {
-            
-            HeaderOverlay()
-        }, body: {
-            
-            ScrollViewContent()
-        })
+        ZStack(alignment: .topLeading) {
+
+            ScrollViewReactiveHeader(header: {
+
+                HeaderView()
+            }, headerOverlay: {
+
+                HeaderOverlay()
+            }, body: {
+
+                ScrollViewContent()
+            })
+
+            HStack {
+
+                Spacer()
+
+                Image(systemName: "magnifyingglass")
+                    .imageScale(.medium)
+
+                Text("Where are you going?")
+                    .font(.callout)
+                    .fontWeight(.medium)
+
+                Spacer()
+            }
+            .opacity(0.8)
+            .padding(6)
+            .background(Color.white)
+            .cornerRadius(20)
+            .padding()
+        }
     }
 }
 
@@ -29,7 +51,7 @@ struct HeaderView: View {
         Image("night-sky")
             .resizable()
             .aspectRatio(contentMode: .fill)
-            .frame(height: 350)
+            .frame(height: 450)
     }
 }
 
@@ -39,8 +61,23 @@ struct HeaderOverlay: View {
 
     var body: some View {
 
-        Text("Not sure where to go? \n Perfect.")
-            .foregroundColor(.white)
+        VStack {
+
+            Spacer()
+
+            Text("Not sure where to go?")
+                .font(.title)
+                .frame(maxWidth: .infinity, alignment: .center)
+                .foregroundColor(.white)
+
+            Text("Perfect")
+                .font(.title)
+                .frame(maxWidth: .infinity, alignment: .center)
+                .foregroundColor(.white)
+
+            Spacer()
+        }
+        .frame(height: 450)
     }
 }
 
@@ -61,7 +98,7 @@ struct ScrollViewContent: View {
 
             Text("content")
                 .frame(maxWidth: .infinity, alignment: .leading)
-            
+
             Spacer()
         }
         .frame(height: 600)

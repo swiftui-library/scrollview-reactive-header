@@ -1,13 +1,6 @@
 import Foundation
 import SwiftUI
 
-// MARK: - ContentPreferenceData
-
-struct ContentPreferenceData: Equatable {
-
-    let rect: CGRect
-}
-
 // MARK: - ScrollViewHeaderKey
 
 struct ScrollViewHeaderKey: PreferenceKey {

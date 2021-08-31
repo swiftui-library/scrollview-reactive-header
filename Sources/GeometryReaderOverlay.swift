@@ -1,13 +1,19 @@
 import Foundation
 import SwiftUI
 
-public struct GeometryReaderOverlay: View {
+struct ContentPreferenceData: Equatable {
+
+    let rect: CGRect
+}
+
+struct GeometryReaderOverlay<Key: PreferenceKey>: View where Key.Value == ContentPreferenceData {
 
     // MARK: Lifecycle
 
-    public init(coordinateSpace: String = "ReactiveHeader") {
+    public init(key: Key.Type, coordinateSpace: String = "ReactiveHeader") {
 
         self.coordinateSpace = coordinateSpace
+        self.preferenceKey = key.self
     }
 
     // MARK: Public
@@ -18,7 +24,7 @@ public struct GeometryReaderOverlay: View {
 
             Rectangle().fill(Color.clear)
                 .preference(
-                    key: ScrollViewHeaderKey.self,
+                    key: preferenceKey.self,
                     value: ContentPreferenceData(
                         rect: geometry.frame(in: .named(coordinateSpace))))
         }
@@ -27,4 +33,5 @@ public struct GeometryReaderOverlay: View {
     // MARK: Internal
 
     let coordinateSpace: String
+    let preferenceKey: Key.Type
 }

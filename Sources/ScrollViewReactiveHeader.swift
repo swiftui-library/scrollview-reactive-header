@@ -24,40 +24,61 @@ public struct ScrollViewReactiveHeader<A, B, C>: View where A: View, B: View, C:
             GeometryReader { geometry in
 
                 VStack(content: header)
-                    .overlay(GeometryReaderOverlay())
+                    .overlay(GeometryReaderOverlay(key: ScrollViewHeaderKey.self))
+                    .offset(x: .zero, y: headerOffset)
+                    .scaleEffect(headerScale)
+                    .opacity(headerOpacity)
 
                 VStack(content: headerOverlay)
 
-                ScrollViewReader { proxy in
+                ScrollView {
 
-                    ScrollView {
-                        
-                        VStack {}
-                            .frame(height: headerHeight)
+                    VStack {}
+                        .frame(height: headerHeight)
+                        .overlay(GeometryReaderOverlay(key: ScrollViewBodyKey.self))
 
-                        VStack(content: bodyContent)
-                            .background(backgroundColor)
-                    }
+                    VStack(content: bodyContent)
+                        .background(backgroundColor)
                 }
             }
             .onPreferenceChange(ScrollViewHeaderKey.self, perform: { preference in
-                
+
                 guard preference.rect != .zero,
                       headerHeight == .none else { return }
-                
+
                 headerHeight = preference.rect.height
             })
         }
-    }
-    
-    var backgroundColor: Color {
+        .background(backgroundColor)
+        .coordinateSpace(name: "ReactiveHeader")
+        .onPreferenceChange(ScrollViewBodyKey.self, perform: { preference in
 
-        colorScheme == .dark ? .black : .white
+            headerOffset = min(0, preference.rect.minY / 10)
+
+            headerScale = max(1, 1 + preference.rect.minY / 500)
+
+            guard let headerHeight = headerHeight else { return }
+
+            let startingY = headerHeight / 2
+
+            if abs(preference.rect.minY) > startingY {
+
+                headerOpacity = (1 - (abs(preference.rect.minY) - startingY) / startingY)
+            } else {
+
+                headerOpacity = 1
+            }
+        })
     }
 
     // MARK: Internal
 
     @Environment(\.colorScheme) var colorScheme
+
+    var backgroundColor: Color {
+
+        colorScheme == .dark ? .black : .white
+    }
 
     // MARK: Private
 
@@ -66,4 +87,7 @@ public struct ScrollViewReactiveHeader<A, B, C>: View where A: View, B: View, C:
     private var bodyContent: () -> C
 
     @State private var headerHeight: CGFloat?
+    @State private var headerOffset: CGFloat = .zero
+    @State private var headerScale: CGFloat = 1
+    @State private var headerOpacity: CGFloat = 1
 }
