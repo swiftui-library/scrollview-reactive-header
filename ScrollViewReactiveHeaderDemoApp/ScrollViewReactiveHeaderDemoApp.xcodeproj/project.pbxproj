@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8459FC1A26E25E0C00EB434F /* FlightHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8459FC1926E25E0C00EB434F /* FlightHeaderView.swift */; };
+		8459FC1C26E25E5D00EB434F /* FlightViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8459FC1B26E25E5D00EB434F /* FlightViewModel.swift */; };
+		8459FC1E26E2665D00EB434F /* FlightDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8459FC1D26E2665D00EB434F /* FlightDetailView.swift */; };
 		848BCF8826DE4ED800F8D967 /* ScrollViewReactiveHeaderDemoAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848BCF8726DE4ED800F8D967 /* ScrollViewReactiveHeaderDemoAppApp.swift */; };
 		848BCF8A26DE4ED800F8D967 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848BCF8926DE4ED800F8D967 /* ContentView.swift */; };
 		848BCF8C26DE4EDA00F8D967 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 848BCF8B26DE4EDA00F8D967 /* Assets.xcassets */; };
@@ -15,6 +18,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8459FC1926E25E0C00EB434F /* FlightHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightHeaderView.swift; sourceTree = "<group>"; };
+		8459FC1B26E25E5D00EB434F /* FlightViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightViewModel.swift; sourceTree = "<group>"; };
+		8459FC1D26E2665D00EB434F /* FlightDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightDetailView.swift; sourceTree = "<group>"; };
 		848BCF8426DE4ED800F8D967 /* ScrollViewReactiveHeaderDemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScrollViewReactiveHeaderDemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		848BCF8726DE4ED800F8D967 /* ScrollViewReactiveHeaderDemoAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewReactiveHeaderDemoAppApp.swift; sourceTree = "<group>"; };
 		848BCF8926DE4ED800F8D967 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -36,6 +42,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8459FC1826E25DEF00EB434F /* FlightView */ = {
+			isa = PBXGroup;
+			children = (
+				8459FC1926E25E0C00EB434F /* FlightHeaderView.swift */,
+				8459FC1D26E2665D00EB434F /* FlightDetailView.swift */,
+			);
+			path = FlightView;
+			sourceTree = "<group>";
+		};
 		848BCF7B26DE4ED800F8D967 = {
 			isa = PBXGroup;
 			children = (
@@ -60,6 +75,8 @@
 				848BCF9626DE4EFC00F8D967 /* Resource Files */,
 				848BCF8726DE4ED800F8D967 /* ScrollViewReactiveHeaderDemoAppApp.swift */,
 				848BCF8926DE4ED800F8D967 /* ContentView.swift */,
+				8459FC1B26E25E5D00EB434F /* FlightViewModel.swift */,
+				8459FC1826E25DEF00EB434F /* FlightView */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -161,7 +178,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8459FC1A26E25E0C00EB434F /* FlightHeaderView.swift in Sources */,
 				848BCF8A26DE4ED800F8D967 /* ContentView.swift in Sources */,
+				8459FC1C26E25E5D00EB434F /* FlightViewModel.swift in Sources */,
+				8459FC1E26E2665D00EB434F /* FlightDetailView.swift in Sources */,
 				848BCF8826DE4ED800F8D967 /* ScrollViewReactiveHeaderDemoAppApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
