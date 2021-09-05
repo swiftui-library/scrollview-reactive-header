@@ -7,20 +7,19 @@ struct ContentView: View {
 
     var body: some View {
         
-//        TabView {
-//
-//            StoryListView()
-//                .tabItem {
-//                    VStack {
-//                    Image(systemName: "book")
-//                    Text("Reader")
-//                    }
-//                }
-//        }
-        VStack {
-        StoryListView()
+        TabView {
+
+            StoryListView()
+                .tabItem {
+                    VStack {
+                    Image(systemName: "book")
+                        .foregroundColor(.gray)
+                    Text("Reader")
+                        .foregroundColor(.gray)
+                    }
+                }
         }
-        
+        .preferredColorScheme(.light)
     }
 }
 

@@ -10,6 +10,8 @@ struct StoryListHeaderOverlay: View {
 
         VStack(alignment: .center) {
             
+            Spacer()
+            
             ZStack {
 
                 Rectangle()
@@ -23,6 +25,8 @@ struct StoryListHeaderOverlay: View {
                     .font(.system(size: 32, weight: .semibold, design: .serif))
                     .frame(maxWidth: .infinity)
             }
+            
+            Spacer()
         }
     }
 }

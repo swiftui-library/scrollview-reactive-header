@@ -9,10 +9,12 @@ struct StoryListContentView: View {
     var body: some View {
 
         VStack {
-            
-            VStack {}
-                .frame(height: 300)
 
+            ForEach(viewModel.stories) { story in
+
+                StoryListCell(viewModel: story)
+            }
+            
             ForEach(viewModel.stories) { story in
 
                 StoryListCell(viewModel: story)

@@ -13,31 +13,15 @@ struct StoryListView: View {
             ScrollViewReactiveHeader(header: {
 
                 HeaderView()
+                    .frame(height: 300)
             }, headerOverlay: {
 
                 StoryListHeaderOverlay(header: viewModel.header)
+                    .frame(height: 300)
             }, body: {
 
                 StoryListContentView(viewModel: viewModel)
             })
-
-//        ScrollView {
-//
-//            VStack {
-//
-//                HeaderView()
-//                    .background(GeometryReaderOverlay())
-//
-//                StoryListHeaderOverlay(header: viewModel.header)
-//
-//                StoryListContentView(viewModel: viewModel)
-//
-//            }
-//        }
-//        .onPreferenceChange(ScrollViewHeaderKey.self) { preferenceData in
-//
-//            print(preferenceData.rect.height)
-//        }
     }
 }
 
@@ -51,7 +35,6 @@ struct HeaderView: View {
             .resizable()
             .aspectRatio(contentMode: .fill)
             .opacity(0.35)
-            .frame(height: 300)
     }
 }
 
