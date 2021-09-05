@@ -9,17 +9,28 @@ struct ContentView: View {
 
         TabView {
 
+            SpotifyView()
+                .tabItem {
+                    VStack {
+
+                        Image(systemName: "music.note.list")
+
+                        Text("Music")
+                    }
+                }
+
             StoryListView()
                 .tabItem {
                     VStack {
+
                         Image(systemName: "book")
 
                         Text("Reader")
                     }
                 }
         }
-        .accentColor(.black)
         .preferredColorScheme(.light)
+        .accentColor(.black)
     }
 }
 

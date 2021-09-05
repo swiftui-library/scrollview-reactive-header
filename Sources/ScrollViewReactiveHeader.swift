@@ -44,14 +44,14 @@ public struct ScrollViewReactiveHeader<A, B, C>: View where A: View, B: View, C:
                 }
 
                 if configuration.showStatusBar {
-                    
+
                     Rectangle()
-                        .fill(Color.white)
+                        .fill(backgroundColor)
                         .opacity(statusBarOpacity)
                         .frame(height: geometry.safeAreaInsets.top)
                         .edgesIgnoringSafeArea(.top)
                         .onAppear {
-                            
+
                             topSafeArea = geometry.safeAreaInsets.top
                         }
                 }
@@ -67,7 +67,7 @@ public struct ScrollViewReactiveHeader<A, B, C>: View where A: View, B: View, C:
         .background(backgroundColor)
         .coordinateSpace(name: "ReactiveHeader")
         .onPreferenceChange(ScrollViewBodyKey.self, perform: { preference in
-            
+
             setStatusBarOpacity(offset: preference.rect.minY)
 
             setHeaderOpacity(preferenceRect: preference.rect)
@@ -80,7 +80,12 @@ public struct ScrollViewReactiveHeader<A, B, C>: View where A: View, B: View, C:
 
     var backgroundColor: Color {
 
-        colorScheme == .dark ? .black : .white
+        guard let backgroundColor = configuration.backgroundColor else {
+            
+            return colorScheme == .dark ? .black : .white
+        }
+        
+        return backgroundColor
     }
 
     // MARK: Private
@@ -94,7 +99,7 @@ public struct ScrollViewReactiveHeader<A, B, C>: View where A: View, B: View, C:
     @State private var headerOffset: CGFloat = .zero
     @State private var headerScale: CGFloat = 1
     @State private var headerOpacity: CGFloat = 1
-    
+
     @State private var statusBarOpacity: Double = 0
     @State private var topSafeArea: CGFloat = 40
 
@@ -118,17 +123,17 @@ public struct ScrollViewReactiveHeader<A, B, C>: View where A: View, B: View, C:
     }
 
     private func setStatusBarOpacity(offset: CGFloat) {
-        
+
         guard let headerOffset = headerHeight else { return }
-        
+
         let scrollOffset = offset + headerOffset
-        
+
         print(scrollOffset)
 
         switch scrollOffset {
-        
-        case 40 ... 60: statusBarOpacity = Double(-scrollOffset / 100.0)
-        case ...(40): statusBarOpacity = 1
+
+        case topSafeArea ... topSafeArea + 20: statusBarOpacity = Double(-scrollOffset / 100.0)
+        case ...topSafeArea: statusBarOpacity = 1
         default: statusBarOpacity = 0
         }
     }

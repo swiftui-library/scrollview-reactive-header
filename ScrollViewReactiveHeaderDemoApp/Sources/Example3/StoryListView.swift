@@ -9,7 +9,6 @@ struct StoryListView: View {
 
     var body: some View {
 
-
             ScrollViewReactiveHeader(header: {
 
                 HeaderView()
@@ -21,13 +20,13 @@ struct StoryListView: View {
             }, body: {
 
                 StoryListContentView(viewModel: viewModel)
-            }, configuration: .init(showStatusBar: true))
+            }, configuration: .init(showStatusBar: true, backgroundColor: .white))
     }
 }
 
 // MARK: - HeaderView
 
-struct HeaderView: View {
+fileprivate struct HeaderView: View {
 
     var body: some View {
 
