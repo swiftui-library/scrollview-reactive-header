@@ -15,6 +15,5 @@ struct ScrollViewHeaderKey: PreferenceKey {
         value: inout Value,
         nextValue: () -> Value) {
 
-        value = nextValue()
     }
 }

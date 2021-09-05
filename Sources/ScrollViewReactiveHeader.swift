@@ -27,7 +27,7 @@ public struct ScrollViewReactiveHeader<A, B, C>: View where A: View, B: View, C:
                     .overlay(GeometryReaderOverlay(key: ScrollViewHeaderKey.self))
                     .offset(x: .zero, y: headerOffset)
                     .scaleEffect(headerScale)
-                    .opacity(headerOpacity)
+                    .opacity(Double(headerOpacity))
 
                 VStack(content: headerOverlay)
 
@@ -42,6 +42,8 @@ public struct ScrollViewReactiveHeader<A, B, C>: View where A: View, B: View, C:
                 }
             }
             .onPreferenceChange(ScrollViewHeaderKey.self, perform: { preference in
+                
+                print("~ header size: \(preference.rect.height)")
 
                 guard preference.rect != .zero,
                       headerHeight == .none else { return }
@@ -56,6 +58,8 @@ public struct ScrollViewReactiveHeader<A, B, C>: View where A: View, B: View, C:
             headerOffset = min(0, preference.rect.minY / 10)
 
             headerScale = max(1, 1 + preference.rect.minY / 500)
+            
+            print(preference.rect)
 
             guard let headerHeight = headerHeight else { return }
 

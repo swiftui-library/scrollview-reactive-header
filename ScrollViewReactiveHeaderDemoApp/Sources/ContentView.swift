@@ -6,52 +6,21 @@ import SwiftUI
 struct ContentView: View {
 
     var body: some View {
-
-        ZStack(alignment: .topLeading) {
-
-            ScrollViewReactiveHeader(header: {
-
-                HeaderView()
-            }, headerOverlay: {
-
-                HeaderOverlay()
-            }, body: {
-
-                ScrollViewContent()
-            })
-
-            HStack {
-
-                Spacer()
-
-                Image(systemName: "magnifyingglass")
-                    .imageScale(.medium)
-
-                Text("Where are you going?")
-                    .font(.callout)
-                    .fontWeight(.medium)
-
-                Spacer()
-            }
-            .opacity(0.8)
-            .padding(6)
-            .background(Color.white)
-            .cornerRadius(20)
-            .padding()
+        
+//        TabView {
+//
+//            StoryListView()
+//                .tabItem {
+//                    VStack {
+//                    Image(systemName: "book")
+//                    Text("Reader")
+//                    }
+//                }
+//        }
+        VStack {
+        StoryListView()
         }
-    }
-}
-
-// MARK: - HeaderView
-
-struct HeaderView: View {
-
-    var body: some View {
-
-        Image("night-sky")
-            .resizable()
-            .aspectRatio(contentMode: .fill)
-            .frame(height: 450)
+        
     }
 }
 
