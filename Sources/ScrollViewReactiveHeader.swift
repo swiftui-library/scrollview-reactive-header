@@ -8,11 +8,13 @@ public struct ScrollViewReactiveHeader<A, B, C>: View where A: View, B: View, C:
     public init(
         @ViewBuilder header: @escaping () -> A,
         @ViewBuilder headerOverlay: @escaping () -> B,
-        @ViewBuilder body: @escaping () -> C) {
+        @ViewBuilder body: @escaping () -> C,
+        configuration: ScrollViewConfiguration) {
 
         self.header = header
         self.headerOverlay = headerOverlay
         bodyContent = body
+        self.configuration = configuration
     }
 
     // MARK: Public
@@ -40,10 +42,21 @@ public struct ScrollViewReactiveHeader<A, B, C>: View where A: View, B: View, C:
                     VStack(content: bodyContent)
                         .background(backgroundColor)
                 }
+
+                if configuration.showStatusBar {
+                    
+                    Rectangle()
+                        .fill(Color.white)
+                        .opacity(statusBarOpacity)
+                        .frame(height: geometry.safeAreaInsets.top)
+                        .edgesIgnoringSafeArea(.top)
+                        .onAppear {
+                            
+                            topSafeArea = geometry.safeAreaInsets.top
+                        }
+                }
             }
             .onPreferenceChange(ScrollViewHeaderKey.self, perform: { preference in
-                
-                print("~ header size: \(preference.rect.height)")
 
                 guard preference.rect != .zero,
                       headerHeight == .none else { return }
@@ -54,24 +67,10 @@ public struct ScrollViewReactiveHeader<A, B, C>: View where A: View, B: View, C:
         .background(backgroundColor)
         .coordinateSpace(name: "ReactiveHeader")
         .onPreferenceChange(ScrollViewBodyKey.self, perform: { preference in
-
-            headerOffset = min(0, preference.rect.minY / 10)
-
-            headerScale = max(1, 1 + preference.rect.minY / 500)
             
-            print(preference.rect)
+            setStatusBarOpacity(offset: preference.rect.minY)
 
-            guard let headerHeight = headerHeight else { return }
-
-            let startingY = headerHeight / 2
-
-            if abs(preference.rect.minY) > startingY {
-
-                headerOpacity = (1 - (abs(preference.rect.minY) - startingY) / startingY)
-            } else {
-
-                headerOpacity = 1
-            }
+            setHeaderOpacity(preferenceRect: preference.rect)
         })
     }
 
@@ -89,9 +88,48 @@ public struct ScrollViewReactiveHeader<A, B, C>: View where A: View, B: View, C:
     private var header: () -> A
     private var headerOverlay: () -> B
     private var bodyContent: () -> C
+    private var configuration: ScrollViewConfiguration
 
     @State private var headerHeight: CGFloat?
     @State private var headerOffset: CGFloat = .zero
     @State private var headerScale: CGFloat = 1
     @State private var headerOpacity: CGFloat = 1
+    
+    @State private var statusBarOpacity: Double = 0
+    @State private var topSafeArea: CGFloat = 40
+
+    private func setHeaderOpacity(preferenceRect: CGRect) {
+
+        headerOffset = min(0, preferenceRect.minY / 10)
+
+        headerScale = max(1, 1 + preferenceRect.minY / 500)
+
+        guard let headerHeight = headerHeight else { return }
+
+        let startingY = headerHeight / 2
+
+        if abs(preferenceRect.minY) > startingY {
+
+            headerOpacity = (1 - (abs(preferenceRect.minY) - startingY) / startingY)
+        } else {
+
+            headerOpacity = 1
+        }
+    }
+
+    private func setStatusBarOpacity(offset: CGFloat) {
+        
+        guard let headerOffset = headerHeight else { return }
+        
+        let scrollOffset = offset + headerOffset
+        
+        print(scrollOffset)
+
+        switch scrollOffset {
+        
+        case 40 ... 60: statusBarOpacity = Double(-scrollOffset / 100.0)
+        case ...(40): statusBarOpacity = 1
+        default: statusBarOpacity = 0
+        }
+    }
 }

@@ -6,19 +6,19 @@ import SwiftUI
 struct ContentView: View {
 
     var body: some View {
-        
+
         TabView {
 
             StoryListView()
                 .tabItem {
                     VStack {
-                    Image(systemName: "book")
-                        .foregroundColor(.gray)
-                    Text("Reader")
-                        .foregroundColor(.gray)
+                        Image(systemName: "book")
+
+                        Text("Reader")
                     }
                 }
         }
+        .accentColor(.black)
         .preferredColorScheme(.light)
     }
 }

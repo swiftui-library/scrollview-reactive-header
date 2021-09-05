@@ -21,7 +21,7 @@ struct StoryListView: View {
             }, body: {
 
                 StoryListContentView(viewModel: viewModel)
-            })
+            }, configuration: .init(showStatusBar: true))
     }
 }
 
