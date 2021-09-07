@@ -51,35 +51,6 @@ struct SpotifyHomeView: View {
             }
         }, configuration: .init(showStatusBar: true, backgroundColor: .black))
         .background(Color.black)
-        
-//        GeometryReader { geometry in
-//            ZStack(alignment: .top) {
-//                HomeHeaderView(
-//                    hPadding: hPadding,
-//                    vPadding: geometry.safeAreaInsets.top + hPadding,
-//                    scrollOffset: $scrollViewOffset)
-//                ScrollView {
-//                    OffsetReader()
-//
-//                    LazyVStack(spacing: vPadding) {
-//                        TopSpacer(topSpace: vPadding)
-//                        ForEach(sections, id: \.order) { section in
-//                            cellView(section: section)
-//                        }
-//                    }
-//
-//                    // Spacer
-//                    VStack {}
-//                        .frame(height: 35)
-//                }
-//                .coordinateSpace(name: "scrollView")
-//                .onPreferenceChange(ScrollOffsetPreferenceKey.self, perform: { offset in
-//                    scrollViewOffset = offset
-//                })
-//            }
-//            .background(Color.black)
-//            .edgesIgnoringSafeArea(.top)
-//        }
     }
 
     func cellView(section: HomeViewSection) -> AnyView {
