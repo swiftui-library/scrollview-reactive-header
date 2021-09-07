@@ -9,7 +9,7 @@ struct HomeHeaderView: View {
     @Binding var scrollOffset: CGFloat
 
     var opacity: Double {
-        print(Double(1 + scrollOffset * 0.01))
+        
         return Double(1 + scrollOffset * 0.01)
     }
 

@@ -7,7 +7,6 @@ struct SpotifyView: View {
     var body: some View {
         
         SpotifyHomeView(sections: NetworkManager.shared.fetchHomeScreen())
-            .edgesIgnoringSafeArea(.top)
     }
 }
 

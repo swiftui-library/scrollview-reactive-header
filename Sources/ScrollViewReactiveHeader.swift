@@ -30,6 +30,8 @@ public struct ScrollViewReactiveHeader<A, B, C>: View where A: View, B: View, C:
                     .offset(x: .zero, y: headerOffset)
                     .scaleEffect(headerScale)
                     .opacity(Double(headerOpacity))
+                    // Workaround to cover safe are without .edgesIgnoringSafeArea
+                    .background(backgroundColor.offset(x: 0, y: -topSafeArea * 2))
 
                 VStack(content: headerOverlay)
 
@@ -127,8 +129,6 @@ public struct ScrollViewReactiveHeader<A, B, C>: View where A: View, B: View, C:
         guard let headerOffset = headerHeight else { return }
 
         let scrollOffset = offset + headerOffset
-
-        print(scrollOffset)
 
         switch scrollOffset {
 

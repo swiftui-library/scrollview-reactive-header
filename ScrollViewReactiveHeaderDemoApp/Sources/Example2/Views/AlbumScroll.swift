@@ -1,18 +1,13 @@
-//
-//  AlbumScroll.swift
-//  SpotifyClone
-//
-//  Created by Trent Guillory on 10/31/20.
-//
-
 import SwiftUI
+
+// MARK: - AlbumScroll
 
 struct AlbumScroll: View {
     @State var section: HomeViewSection
-    
+
     // add this later too (add spacing elements)
     @State var hPadding: CGFloat
-    
+
     var body: some View {
         VStack(alignment: .leading) {
             HomeSectionHeader(header: section.title, hPadding: hPadding)
@@ -28,6 +23,8 @@ struct AlbumScroll: View {
         }
     }
 }
+
+// MARK: - AlbumScroll_Previews
 
 struct AlbumScroll_Previews: PreviewProvider {
     static var previews: some View {
