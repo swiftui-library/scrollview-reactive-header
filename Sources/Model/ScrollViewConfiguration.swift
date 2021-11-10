@@ -5,7 +5,7 @@ public struct ScrollViewConfiguration {
 
     // MARK: Lifecycle
 
-    public init(showStatusBar: Bool, backgroundColor: Color?) {
+    public init(showStatusBar: Bool, backgroundColor: Color? = nil) {
 
         self.showStatusBar = showStatusBar
         self.backgroundColor = backgroundColor
